@@ -1,1 +1,38 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>لوحة الإدارة</title><link rel="stylesheet" href="style.css"><script src="config.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script></head><body><header class="top"><div class="wrap"><h1>لوحة إدارة الاستمارات</h1></div></header><main class="wrap"><section id="login" class="panel narrow"><h2>تسجيل الدخول</h2><form id="loginForm"><label>البريد الإلكتروني<input name="email" type="email" required></label><label>كلمة المرور<input name="password" type="password" required></label><button class="primary">دخول</button><p id="loginMsg"></p></form></section><section id="panel" class="panel hidden"><div class="toolbar"><h2>السجلات</h2><button id="export">تصدير Excel</button><button id="logout">خروج</button></div><div class="filters"><input id="q" placeholder="بحث بالاسم أو الهاتف أو رقم الناخب"><input id="prov" placeholder="المحافظة"><select id="emp"><option value="">كل الحالات</option><option value="true">موظف</option><option value="false">غير موظف</option></select><input id="from" type="date" aria-label="من تاريخ"><input id="to" type="date" aria-label="إلى تاريخ"><button id="search">بحث</button></div><p id="status"></p><div class="tableWrap"><table><thead><tr><th>رقم</th><th>الاسم</th><th>الهاتف</th><th>المحافظة</th><th>القضاء</th><th>موظف</th><th>التاريخ</th><th>إجراءات</th></tr></thead><tbody id="rows"></tbody></table></div><p>يعرض أول 1000 سجل مطابق.</p></section></main><dialog id="dlg"><h2>تعديل السجل</h2><form id="editForm"><div class="fields" id="editFields"></div><div class="toolbar"><button type="button" id="save" class="primary">حفظ</button><button type="button" id="cancel">إلغاء</button></div><p id="editMsg"></p></form></dialog><script src="admin.js"></script></body></html>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>لوحة الإدارة</title><link rel="stylesheet" href="style.css">
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+<header class="top"><div class="wrap"><h1>لوحة إدارة الاستمارات</h1></div></header>
+<main class="wrap">
+<section id="login" class="panel narrow"><h2>تسجيل الدخول</h2>
+<form id="loginForm"><label>البريد الإلكتروني<input name="email" type="email" required></label><label>كلمة المرور<input name="password" type="password" required></label><button class="primary">دخول</button><p id="loginMsg"></p></form>
+</section>
+<section id="panel" class="panel hidden">
+<div class="toolbar"><h2>السجلات</h2><button id="export">تصدير Excel</button><button id="backupNow">نسخ احتياطي الآن</button><button id="restorePick">استعادة نسخة</button><input id="restoreFile" type="file" accept="application/json,.json" class="hidden"><button id="logout">خروج</button></div>
+<p id="backupStatus" role="status"></p>
+<section class="panel">
+<h3>إدارة المستخدمين</h3>
+<p>إضافة مستخدم ترسل له دعوة إلى بريده الإلكتروني. هذه العملية متاحة للمدير الرئيسي فقط.</p>
+<form id="userForm" class="toolbar"><label>البريد الإلكتروني للمستخدم الجديد<input id="newUserEmail" type="email" required placeholder="name@example.com"></label><button class="primary" type="submit">إرسال دعوة</button></form>
+<p id="userStatus" role="status"></p>
+</section>
+<div class="filters">
+<input id="q" placeholder="بحث بالاسم أو الهاتف أو رقم الناخب">
+<input id="prov" placeholder="المحافظة">
+<select id="emp"><option value="">كل الحالات</option><option value="true">موظف</option><option value="false">غير موظف</option></select>
+<input id="from" type="date" aria-label="من تاريخ"><input id="to" type="date" aria-label="إلى تاريخ"><button id="search">بحث</button>
+</div>
+<p id="status"></p>
+<div class="tableWrap"><table><thead><tr><th>رقم</th><th>الاسم</th><th>الهاتف</th><th>المحافظة</th><th>القضاء</th><th>موظف</th><th>التاريخ</th><th>روابط التواصل</th><th>إجراءات</th></tr></thead><tbody id="rows"></tbody></table></div>
+<p>يعرض أول 1000 سجل مطابق.</p>
+</section>
+</main>
+<dialog id="dlg"><h2>تعديل السجل</h2><form id="editForm"><div class="fields" id="editFields"></div><div class="toolbar"><button type="button" id="save" class="primary">حفظ</button><button type="button" id="cancel">إلغاء</button></div><p id="editMsg"></p></form></dialog>
+<script src="admin.js"></script>
+</body></html>
