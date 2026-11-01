@@ -49,7 +49,7 @@ supabase secrets set SUPABASE_URL="https://hoggakqqtapdhtmoolym.supabase.co" SUP
 ## 4) تشغيل النسخ الاحتياطي اليومي
 1. من Supabase Dashboard > Database > Extensions فعّل `pg_cron` و`pg_net` و`supabase_vault` (قد يظهر Vault باسم `vault`).
 2. افتح `supabase/daily_backup_cron.sql`.
-3. استبدل `CRON_SECRET` بنفس القيمة التي ضبطتها في `BACKUP_CRON_SECRET`، ثم شغّل SQL في SQL Editor.
+3. استبدل `PUBLIC_ANON_KEY` بالمفتاح العام للمشروع، و`BACKUP_CRON_SECRET` بنفس الرمز الذي ضبطته في أسرار Edge Function، ثم شغّل SQL في SQL Editor. لا تضع service_role key في هذا الملف.
 4. الجدولة الافتراضية الساعة 02:00 UTC (05:00 صباحاً بتوقيت العراق).
 
 النسخ اليدوي متاح من لوحة الإدارة. النسخ تحفظ بيانات جدول `submissions` بصيغة JSON في bucket خاص، ويمكن استعادة الملف من زر "استعادة نسخة". الاستعادة تدمج السجلات بحسب رقمها ولا تحذف السجلات الإضافية الموجودة حالياً.
