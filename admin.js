@@ -26,12 +26,12 @@ async function load(){
  const {data,error}=await query;
  if(error){say("status","تعذر تحميل السجلات. تحقق من صلاحيات المدير وتشغيل تحديث قاعدة البيانات.","error");return}
  rows=data||[];const tb=$("rows");tb.innerHTML="";
- for(const r of rows){
+ rows.forEach((r,index)=>{
   const links=[["facebook_url","Facebook"],["instagram_url","Instagram"],["tiktok_url","TikTok"],["twitter_url","X"]].filter(([k])=>safeUrl(r[k])).map(([k,n])=>'<a href="'+esc(safeUrl(r[k]))+'" target="_blank" rel="noopener noreferrer">'+n+'</a>').join(" · ")||"—";
   const tr=document.createElement("tr");
-  tr.innerHTML='<td>'+esc(r.id)+'</td><td>'+esc(r.full_name)+'</td><td>'+esc(r.phone)+'</td><td>'+esc(r.province)+'</td><td>'+esc(r.district)+'</td><td>'+(r.is_employee?"نعم":"لا")+'</td><td>'+esc(String(r.created_at||"").slice(0,10))+'</td><td>'+links+'</td><td><button data-p="'+esc(r.id)+'">PDF / طباعة</button> <button data-e="'+esc(r.id)+'">تعديل</button> <button data-d="'+esc(r.id)+'">حذف</button></td>';
+  tr.innerHTML='<td>'+String(index+1)+'</td><td>'+esc(r.full_name)+'</td><td>'+esc(r.phone)+'</td><td>'+esc(r.province)+'</td><td>'+esc(r.district)+'</td><td>'+(r.is_employee?"نعم":"لا")+'</td><td>'+esc(String(r.created_at||"").slice(0,10))+'</td><td>'+links+'</td><td><button data-p="'+esc(r.id)+'">PDF / طباعة</button> <button data-e="'+esc(r.id)+'">تعديل</button> <button data-d="'+esc(r.id)+'">حذف</button></td>';
   tb.appendChild(tr);
- }
+ });
  say("status","عدد السجلات: "+rows.length,"success");
 }
 async function loadBackupHistory(){
@@ -77,7 +77,7 @@ $("save").onclick=async()=>{
 };
 $("export").onclick=()=>{
  if(!rows.length)return;
- const data=rows.map(r=>({"رقم السجل":r.id,"الاسم":r.full_name,"المواليد":r.birth_date,"تاريخ الانتماء":r.affiliation_date,"الحالة الاجتماعية":r.marital_status,"اسم الأم":r.mother_name,"رقم الناخب":r.voter_number,"المحافظة":r.province,"القضاء":r.district,"الناحية":r.subdistrict,"المحلة":r.mahalla,"الزقاق":r.street,"الدار":r.house_number,"التحصيل الدراسي":r.education,"الهاتف":r.phone,"موظف":r.is_employee?"نعم":"لا","مكان الوظيفة":r.workplace,"المهنة":r.profession,"المعرف أو المزكي":r.recommender,"Facebook":r.facebook_url,"Instagram":r.instagram_url,"TikTok":r.tiktok_url,"Twitter / X":r.twitter_url,"تاريخ الإرسال":r.created_at}));
+ const data=rows.map((r,index)=>({"التسلسل":index+1,"رقم السجل الداخلي":r.id,"الاسم":r.full_name,"المواليد":r.birth_date,"تاريخ الانتماء":r.affiliation_date,"الحالة الاجتماعية":r.marital_status,"اسم الأم":r.mother_name,"رقم الناخب":r.voter_number,"المحافظة":r.province,"القضاء":r.district,"الناحية":r.subdistrict,"المحلة":r.mahalla,"الزقاق":r.street,"الدار":r.house_number,"التحصيل الدراسي":r.education,"الهاتف":r.phone,"موظف":r.is_employee?"نعم":"لا","مكان الوظيفة":r.workplace,"المهنة":r.profession,"المعرف أو المزكي":r.recommender,"Facebook":r.facebook_url,"Instagram":r.instagram_url,"TikTok":r.tiktok_url,"Twitter / X":r.twitter_url,"تاريخ الإرسال":r.created_at}));
  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(data),"معلومات الأفراد");XLSX.writeFile(wb,"معلومات_الأفراد.xlsx")
 };
 $("backupNow").onclick=async()=>{
