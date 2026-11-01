@@ -14,6 +14,7 @@ create table if not exists public.admin_roles (
   created_at timestamptz not null default now()
 );
 alter table public.admin_roles enable row level security;
+grant select on public.admin_roles to authenticated;
 
 create or replace function public.is_admin()
 returns boolean
@@ -56,6 +57,7 @@ create table if not exists public.backup_runs (
   backup_type text not null default 'manual' check (backup_type in ('manual','scheduled'))
 );
 alter table public.backup_runs enable row level security;
+grant select on public.backup_runs to authenticated;
 drop policy if exists "backup runs admin read" on public.backup_runs;
 create policy "backup runs admin read" on public.backup_runs
   for select to authenticated using (public.is_admin());
