@@ -17,3 +17,10 @@
   font-weight: bold;
   line-height: 1.6;
 }
+
+/* Admin tools */
+#backupStatus,#userStatus{line-height:1.8;margin:8px 0}
+#userForm label{min-width:min(320px,100%)}
+#rows a{color:#155b94;text-decoration:underline}
+#rows button{padding:7px 9px;margin:2px;font-size:13px}
+@media print{.top,.toolbar,.filters,button{display:none!important}}
