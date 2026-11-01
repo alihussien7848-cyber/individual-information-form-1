@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
@@ -8,20 +7,36 @@
   <link rel="stylesheet" href="style.css">
   <script src="config.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    .organization-header {
+      text-align: center;
+      padding: 20px 10px;
+      margin-bottom: 20px;
+    }
+    .organization-logo img {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 15px;
+    }
+    .organization-header h2 {
+      font-size: 22px;
+      font-weight: bold;
+      line-height: 1.6;
+    }
+  </style>
 </head>
-
 <body>
 
   <header class="organization-header">
     <div class="organization-logo">
       <img src="/logo.png" alt="شعار الجهة">
     </div>
-
     <h2>المقاومة الإسلامية - حركة عصائب أهل الحق</h2>
   </header>
 
   <main class="wrap">
-
     <div class="notice">
       <b>الخصوصية:</b>
       تُستخدم المعلومات للغرض الإداري المحدد من الجهة المسؤولة.
@@ -29,7 +44,6 @@
     </div>
 
     <form id="form" class="panel">
-
       <div class="fields">
 
         <label>الاسم الرباعي واللقب *
@@ -127,6 +141,22 @@
           <input name="recommender">
         </label>
 
+        <label>رابط Facebook
+          <input name="facebook_url" type="url" placeholder="https://facebook.com/...">
+        </label>
+
+        <label>رابط Instagram
+          <input name="instagram_url" type="url" placeholder="https://instagram.com/...">
+        </label>
+
+        <label>رابط TikTok
+          <input name="tiktok_url" type="url" placeholder="https://tiktok.com/@...">
+        </label>
+
+        <label>رابط Twitter / X
+          <input name="twitter_url" type="url" placeholder="https://x.com/...">
+        </label>
+
       </div>
 
       <label class="consent">
@@ -134,15 +164,13 @@
         أوافق على جمع المعلومات للغرض الموضح أعلاه.
       </label>
 
-      <button class="primary">إرسال الاستمارة</button>
+      <button class="primary" type="submit">إرسال الاستمارة</button>
       <p id="msg" role="status"></p>
-
     </form>
 
     <p style="text-align:center">
       <a href="admin.html">دخول الإدارة</a>
     </p>
-
   </main>
 
   <script src="form.js"></script>
