@@ -24,3 +24,28 @@
 #rows a{color:#155b94;text-decoration:underline}
 #rows button{padding:7px 9px;margin:2px;font-size:13px}
 @media print{.top,.toolbar,.filters,button{display:none!important}}
+
+
+/* Admin dashboard: use the full browser width and improve readability */
+body.admin-page .wrap{width:100%;max-width:none;margin:0;padding:0 20px}
+body.admin-page .top{padding:20px 24px}
+body.admin-page main.wrap{padding:0 18px}
+body.admin-page #panel{min-height:calc(100vh - 110px);margin:14px 0;padding:24px}
+body.admin-page #panel>.panel{margin:18px 0}
+body.admin-page .filters{display:grid;grid-template-columns:minmax(280px,2fr) repeat(4,minmax(150px,1fr)) auto;gap:12px}
+body.admin-page .filters input,body.admin-page .filters select{width:100%;min-width:0;min-height:48px;font-size:16px}
+body.admin-page .filters button{min-height:48px;padding:10px 24px}
+body.admin-page .tableWrap{width:100%;overflow:auto}
+body.admin-page table{width:100%;min-width:1100px}
+body.admin-page td,body.admin-page th{font-size:15px;padding:13px 12px}
+body.admin-page .toolbar button{min-height:44px}
+@media(max-width:900px){
+ body.admin-page .filters{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body.admin-page .filters input:first-child{grid-column:1/-1}
+}
+@media(max-width:560px){
+ body.admin-page main.wrap{padding:0 8px}
+ body.admin-page #panel{padding:12px}
+ body.admin-page .filters{grid-template-columns:1fr}
+ body.admin-page .filters input:first-child{grid-column:auto}
+}
