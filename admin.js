@@ -18,7 +18,7 @@ function show(){$("login").classList.add("hidden");$("panel").classList.remove("
 async function load(){
  say("status","جارٍ التحميل...");
  let q=$("q").value.trim(),query=db.from("submissions").select("*").order("id",{ascending:false}).limit(1000);
- if(q)query=query.or("full_name.ilike.%"+q+"%,phone.ilike.%"+q+"%,voter_number.ilike.%"+q+"%");
+ if(q)query=query.or("full_name.ilike.%"+q+"%,phone.ilike.%"+q+"%,voter_number.ilike.%"+q+"%,recommender.ilike.%"+q+"%");
  if($("prov").value.trim())query=query.ilike("province","%"+$("prov").value.trim()+"%");
  if($("emp").value!=="")query=query.eq("is_employee",$("emp").value==="true");
  if($("from").value)query=query.gte("created_at",$("from").value+"T00:00:00");
